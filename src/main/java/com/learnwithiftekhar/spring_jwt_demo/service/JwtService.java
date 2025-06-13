@@ -2,6 +2,7 @@ package com.learnwithiftekhar.spring_jwt_demo.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -28,7 +29,7 @@ public class JwtService {
                 .subject(userDetails.getUsername())
                 .build();
 
-        JwsHeader header = JwsHeader.with(MacAlgorithm.HS256)
+        JwsHeader header = JwsHeader.with(SignatureAlgorithm.RS256)
                 .build();
 
         return jwtEncoder.encode(
