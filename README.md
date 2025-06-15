@@ -107,7 +107,7 @@ openssl rsa -pubout -in private.pem -out public.pem
 
 Place the generated `private.pem` and `public.pem` files in `src/main/resources/certs/`.
 
-// This RSA key is for demonstration only. Do not use in production.
+**Note:** This RSA key is for demonstration only. Do not use in production.
 
 Reference these in your `application.properties`:
 ```properties
@@ -153,7 +153,8 @@ The application will start on port 8080 by default.
 This project is for educational/demo purposes.
 
 ## Author
-Iftekhar Hossain
+Iftekhar Hossain  
+Email: learnwithiftekhar@gmail.com
 
 [My YouTube Channel](https://www.youtube.com/@learnWithIfte)
 
