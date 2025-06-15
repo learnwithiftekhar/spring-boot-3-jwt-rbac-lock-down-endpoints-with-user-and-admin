@@ -14,6 +14,10 @@ openssl rsa -pubout -in private.pem -out public.pem
 
 Place the generated `private.pem` and `public.pem` files in `src/main/resources/certs/` and reference them in your configuration.
 
+> **Note:**
+> - The provided RSA key files (`private.pem` and `public.pem`) are for demonstration purposes only. **Do not use these keys in production.**
+> - Every developer must generate their own unique RSA key pair for any real-world or production use. See the instructions below for generating your own keys.
+
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
@@ -102,6 +106,8 @@ openssl rsa -pubout -in private.pem -out public.pem
 ```
 
 Place the generated `private.pem` and `public.pem` files in `src/main/resources/certs/`.
+
+// This RSA key is for demonstration only. Do not use in production.
 
 Reference these in your `application.properties`:
 ```properties
