@@ -35,6 +35,7 @@ Place the generated `private.pem` and `public.pem` files in `src/main/resources/
 ## Related YouTube Tutorials
 - [Spring Boot 3: Secure Your API with HS256 JWTs (Part 1)](https://www.youtube.com/watch?v=nX66hgUcmS0)
 - [RSA & JWKS in Spring Boot 3: Secure JWT the Enterprise Way (Part 2)](https://youtu.be/1-Bf7nrLSds)
+- [Spring Boot 3 JWT RBAC — Lock Down Endpoints with User & Admin Roles (Part 3)](https://youtu.be/aDEkqNcSzuA)
 
 ## Overview
 This project showcases how to implement secure JWT (JSON Web Token) authentication in a Spring Boot application. It provides a robust security layer for REST APIs with token-based authentication, leveraging RSA key pairs and JWKS for enterprise-level security.
@@ -159,4 +160,3 @@ Email: learnwithiftekhar@gmail.com
 [My YouTube Channel](https://www.youtube.com/@learnWithIfte)
 
 [LinkedIn](https://www.linkedin.com/in/hossain-md-iftekhar/)
-
