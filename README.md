@@ -81,8 +81,8 @@ src/main/resources/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/learnwithiftekhar/RSA-JWKS-in-Spring-Boot-3-Secure-JWT-the-Enterprise-Way.git
-cd RSA-JWKS-in-Spring-Boot-3-Secure-JWT-the-Enterprise-Way
+git clone https://github.com/learnwithiftekhar/spring-boot-3-jwt-rbac-lock-down-endpoints-with-user-and-admin.git
+cd spring-boot-3-jwt-rbac-lock-down-endpoints-with-user-and-admin
 ```
 
 ### 2. Configure database
