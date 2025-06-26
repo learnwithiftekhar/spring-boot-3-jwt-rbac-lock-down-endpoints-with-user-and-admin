@@ -1,6 +1,6 @@
-# RSA & JWKS in Spring Boot 3: Secure JWT the Enterprise Way
+# Spring Boot 3 JWT RBAC — Lock Down Endpoints with User & Admin Roles
 
-A Spring Boot application demonstrating JWT-based authentication and authorization using Spring Security OAuth2 Resource Server, with a focus on enterprise-grade security using RSA key pairs and JWKS (JSON Web Key Set).
+A Spring Boot application demonstrating JWT-based authentication and role-based access control (RBAC) using Spring Security OAuth2 Resource Server. This project showcases how to secure REST API endpoints with different access levels for regular users and administrators, using enterprise-grade RSA key pairs and JWKS (JSON Web Key Set) for JWT token security.
 
 This project uses RSA key pairs for signing and verifying JWT tokens. You can generate your own keys using OpenSSL:
 
@@ -38,26 +38,27 @@ Place the generated `private.pem` and `public.pem` files in `src/main/resources/
 - [Spring Boot 3 JWT RBAC — Lock Down Endpoints with User & Admin Roles (Part 3)](https://youtu.be/aDEkqNcSzuA)
 
 ## Overview
-This project showcases how to implement secure JWT (JSON Web Token) authentication in a Spring Boot application. It provides a robust security layer for REST APIs with token-based authentication, leveraging RSA key pairs and JWKS for enterprise-level security.
+This project demonstrates how to implement JWT-based authentication with Role-Based Access Control (RBAC) in a Spring Boot application. It provides a comprehensive security solution that differentiates between regular users and administrators, ensuring that sensitive endpoints are properly protected. The application leverages RSA key pairs and JWKS for enterprise-level JWT token security, while implementing fine-grained access control based on user roles.
 
 ## Features
-- JWT-based authentication and authorization
-- Spring Security integration
-- Token generation and validation
-- Secure API endpoints
-- MySQL database integration with Spring Data JPA
-- Input validation using Spring Validation
-- RSA key pair support for JWT signing and verification (with OpenSSL key generation instructions)
-- JWKS (JSON Web Key Set) ready configuration for scalable public key distribution
+- **Role-Based Access Control (RBAC)**: Differentiate between USER and ADMIN roles with fine-grained permissions
+- **JWT-based Authentication**: Secure token-based authentication and authorization
+- **Protected Endpoints**: Lock down sensitive admin endpoints while allowing user access to appropriate resources
+- **Spring Security Integration**: Comprehensive security configuration with OAuth2 Resource Server
+- **Token Generation and Validation**: RSA-based JWT token creation and verification
+- **MySQL Database Integration**: User and role management with Spring Data JPA
+- **Input Validation**: Request validation using Spring Validation
+- **RSA Key Pair Support**: Enterprise-grade JWT signing and verification with OpenSSL key generation
+- **JWKS Ready Configuration**: Scalable public key distribution for microservices architecture
 
 ## Project Structure
 ```
 src/main/java/com/learnwithiftekhar/spring_jwt_demo/
-├── config/           # Security configuration
-├── controller/       # REST controllers (Auth, Home)
+├── config/           # Security configuration with RBAC
+├── controller/       # REST controllers (Auth, Home, Admin)
 ├── dto/              # Data Transfer Objects (LoginRequest, LoginResponse)
-├── model/            # JPA entities (User)
-├── ropository/       # Spring Data JPA repositories
+├── model/            # JPA entities (User, Role)
+├── ropository/       # Spring Data JPA repositories (User, Role)
 ├── service/          # Business logic (JWT, User)
 src/main/resources/
 ├── application.properties  # Main configuration
@@ -125,20 +126,33 @@ The application will start on port 8080 by default.
 
 ## API Endpoints
 
-### Authentication
-- `POST /api/v1/login`  
-  Request: `{ "username": "admin", "password": "admin" }`  
-  Response: `{ "token": "<JWT_TOKEN>" }`
+### Public Endpoints
+- `POST /api/v1/auth/login`  
+  **Access**: Public (no authentication required)  
+  **Request**: `{ "username": "admin", "password": "admin" }`  
+  **Response**: `{ "token": "<JWT_TOKEN>" }`
 
-### Protected Endpoint
+### User Endpoints (Authenticated Users)
 - `GET /api/v1/hello`  
-  Requires: `Authorization: Bearer <JWT_TOKEN>`  
-  Response: `Hello <username>`
+  **Access**: Any authenticated user (USER or ADMIN role)  
+  **Requires**: `Authorization: Bearer <JWT_TOKEN>`  
+  **Response**: `Hello <username>`
+
+### Admin Endpoints (Admin Only)
+- `GET /api/v1/admin/get-all-users`  
+  **Access**: ADMIN role only  
+  **Requires**: `Authorization: Bearer <JWT_TOKEN>` with ADMIN role  
+  **Response**: List of all users in the system
 
 ## Configuration
 - Database and JWT key configuration is in `src/main/resources/application.properties`.
-- Default user is created on startup: `admin` / `admin`.
-- Token expiration is 15 minutes (see `JwtService`).
+- **Default Users**: The application creates default users on startup with different roles:
+  - Admin user: `admin` / `admin` (with ADMIN role)
+  - Regular users can be created through the application with USER role
+- **Role-Based Access**: 
+  - ADMIN role: Access to all endpoints including `/api/v1/admin/**`
+  - USER role: Access to general authenticated endpoints like `/api/v1/hello`
+- **Token Configuration**: JWT token expiration is set to 15 minutes (configurable in `JwtService`).
 
 ## Development
 - To build:  
